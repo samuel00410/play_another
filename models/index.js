@@ -2,9 +2,14 @@
 const dbConfig = require("../config/dbConfig");
 const { Sequelize, DataTypes } = require("sequelize");
 
+// 建立 Sequelize 實例
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
+  dialectOptions: {
+    charset: "utf8mb4",
+    collate: "utf8mb4_unicode_ci",
+  },
   operatorsAliases: false,
 
   pool: {
@@ -29,8 +34,12 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// 導入模型
 db.members = require("./memberModel.js")(sequelize, DataTypes);
+db.products = require("./productModel.js")(sequelize, DataTypes);
+db.comments = require("./commentModel.js")(sequelize, DataTypes);
 
+// re-sync 數據庫
 db.sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync done!");
 });
