@@ -15,6 +15,9 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
+// 新增一筆會員資料
+router.post("/addNew", memberController.addNewMember);
+
 // 找出所有會員
 router.get("/members", memberController.findAllMembers);
 

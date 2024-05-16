@@ -12,6 +12,9 @@ var usersRouter = require("./routes/users");
 const todoRouter = require("./routes/todoRouter");
 const productsRouter = require("./routes/productRouter");
 const commentsRouter = require("./routes/commentRouter");
+const studentsRouter = require("./routes/studentRouter");
+const userRouter = require("./routes/userRouter");
+const reserveRouter = require("./routes/reserveRouter");
 
 var app = express();
 
@@ -32,6 +35,9 @@ app.use("/users", usersRouter);
 app.use("/todos", todoRouter);
 app.use("/products", productsRouter);
 app.use("/comments", commentsRouter);
+app.use("/students", studentsRouter);
+app.use("/api/users", userRouter);
+app.use("/api/reserves", reserveRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

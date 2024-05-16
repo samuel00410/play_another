@@ -4,23 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   // 定義模型
   const Member = sequelize.define("member", {
     // 在這裡定義模型屬性
-    googleID: {
-      type: DataTypes.STRING,
-      unique: true,
-    },
-    facebookID: {
-      type: DataTypes.STRING,
-      unique: true,
-    },
-    date: {
-      type: DataTypes.DATE,
-    },
-    thumbnail: {
-      type: DataTypes.TEXT,
-    },
-    phoneNumber: {
-      type: DataTypes.STRING,
-    },
+
     userName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,9 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      // 設定 email 屬性為唯一值
       unique: true,
     },
     password: {
+      type: DataTypes.STRING,
+    },
+    phoneNumber: {
       type: DataTypes.STRING,
     },
     role: {

@@ -38,9 +38,20 @@ db.sequelize = sequelize;
 db.members = require("./memberModel.js")(sequelize, DataTypes);
 db.products = require("./productModel.js")(sequelize, DataTypes);
 db.comments = require("./commentModel.js")(sequelize, DataTypes);
+db.students = require("./studentModel.js")(sequelize, DataTypes);
+db.users = require("./userModel.js")(sequelize, DataTypes);
+db.posts = require("./postModel.js")(sequelize, DataTypes);
+db.reservations = require("./reservationModel.js")(sequelize, DataTypes);
+
+// 模型關聯
+db.users.hasMany(db.posts);
+db.posts.belongsTo(db.users);
+// 用戶與預約之間的關聯
+db.users.hasMany(db.reservations, { foreignKey: "userId", as: "reservations" });
+db.reservations.belongsTo(db.users, { as: "user" });
 
 // re-sync 數據庫
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ alter: true }).then(() => {
   console.log("yes re-sync done!");
 });
 
