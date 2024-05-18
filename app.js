@@ -15,6 +15,7 @@ const commentsRouter = require("./routes/commentRouter");
 const studentsRouter = require("./routes/studentRouter");
 const userRouter = require("./routes/userRouter");
 const reserveRouter = require("./routes/reserveRouter");
+const OpenAiRouter = require("./routes/OpenAiRouter"); // OpenAi的API路徑導向
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use("/comments", commentsRouter);
 app.use("/students", studentsRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reserves", reserveRouter);
+app.use("/api/openai", OpenAiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

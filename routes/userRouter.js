@@ -16,6 +16,29 @@ router.post("/addNewUsers", async (req, res) => {
   return res.send({ msg: "新增用戶成功", data: addUser });
 });
 
+// 取得特定使用者資訊
+router.get("/:userId", async (req, res) => {
+  const { userId } = req.params;
+  console.log(userId);
+  try {
+    let userFound = await User.findOne({ where: { id: userId } });
+    if (!userFound) return res.status(400).send("找不到使用者...");
+    // console.log(UserFound.toJSON());
+    const capitalizedUsername = userFound.getFullnameForCapital();
+    console.log(userFound);
+    return res.send({
+      msg: "使用者資訊",
+      user: {
+        ...userFound.toJSON(),
+        username: capitalizedUsername,
+      },
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send("伺服器錯誤");
+  }
+});
+
 // 修改特定使用者資訊
 router.patch("/edit/:userId", async (req, res) => {
   const { userId } = req.params;
