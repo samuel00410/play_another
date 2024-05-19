@@ -17,7 +17,7 @@ async function createThread() {
   return thread;
 }
 
-// 處理OpenAI的API請求
+// --- 處理OpenAI的API請求 ---
 
 // 創建線程
 router.get("/thread", async (req, res) => {
